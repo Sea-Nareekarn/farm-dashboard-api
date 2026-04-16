@@ -1,48 +1,57 @@
 # farm-dashboard-api (Backend) 🌾
 
+![Status](https://img.shields.io/badge/Status-Active--Development-green?style=for-the-badge)
 [![.NET](https://img.shields.io/badge/.NET-10.0-512bd4?logo=dotnet)](https://dotnet.microsoft.com/download)
-[![Database](https://img.shields.io/badge/Database-Supabase-3ecf8e?logo=supabase)](https://supabase.com/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
-ระบบ API หลังบ้านสำหรับโครงการ **Farm Dashboard** พัฒนาด้วย .NET 10 เพื่อจัดการข้อมูลธุรกรรม (Transactions) ของฟาร์ม เชื่อมต่อกับฐานข้อมูลระบบคลาวด์ Supabase 
-
-## ✨ Key Features
-- **Transaction Management:** ดึงข้อมูลรายรับ-รายจ่ายของฟาร์ม
-- **Secure Configuration:** ใช้ระบบ Environment Variables และ GitHub Secrets เพื่อป้องกันรหัสผ่านรั่วไหล
-- **Interactive Documentation:** มาพร้อม Swagger UI สำหรับทดสอบ API ได้ทันทีผ่าน Browser
-- **Modern Architecture:** ออกแบบโครงสร้างแบบแยกส่วน (Separation of Concerns) ด้วย Controllers และ Models
+[![Supabase](https://img.shields.io/badge/Database-Supabase-3ecf8e?logo=supabase)](https://supabase.com/)
+[![Deployment](https://img.shields.io/badge/Deployment-Railway-0b0d0e?logo=railway)](https://railway.app/)
 
 ---
 
-## 🛠 Tech Stack & Tools
-- **Framework:** .NET 10.0 (ASP.NET Core Web API)
-- **Database:** Supabase (PostgreSQL)
-- **Documentation:** Swagger UI 
-- **Environment:** GitHub Codespaces
+## 🇹🇭 Introduction
+โปรเจกต์นี้เป็นการพัฒนา Full-Stack Application สำหรับจัดการข้อมูลฟาร์ม (Farm Dashboard) โดยแบ่งการทำงานออกเป็นระบบ API หลังบ้านด้วย **.NET 10** และหน้าบ้านด้วย **Next.js** เชื่อมต่อกับฐานข้อมูล **Supabase** 
 
 ---
 
-## 🚀 Getting Started
+## 🇺🇸 Project Overview
+This is a Full-Stack Farm Dashboard application. The project features a robust **.NET 10 Web API** backend and a modern **Next.js** frontend, integrated with **Supabase (PostgreSQL)**.
 
-### 1. Database Schema (Supabase)
-Create SQL Editor:
+---
+
+## 🚧 Development Roadmap (แผนการดำเนินงาน)
+
+### Phase 1: The "First Connection" (Current)
+- [x] **Database:** Initialize Supabase with UUID-based schema.
+- [x] **Backend:** Setup .NET 10 API and Swagger documentation.
+- [ ] **Data Access:** Implement **Dapper** to fetch real data for the first test endpoint.
+- [ ] **End-to-End Test:** Verify connectivity via Postman and Swagger UI.
+
+### Phase 2: Cloud & Public Access
+- [ ] **Railway Deployment:** Host the .NET API on Railway for public access.
+- [ ] **Public Testing:** Confirm the live API is reachable.
+
+### Phase 3: Frontend Integration
+- [ ] **Next.js Setup:** Initialize project with TypeScript and Tailwind CSS.
+- [ ] **UI Implementation:** Integrate **Shadcn/UI** components.
+- [ ] **Data Consumption:** Fetch and display the first transaction record on the dashboard.
+- [ ] **Vercel Deployment:** Host the frontend on Vercel.
+
+### Phase 4: Full Feature Parity
+- [ ] Implement remaining API endpoints (GET ,POST , PUT, DELETE).
+- [ ] Build comprehensive dashboard UI components.
+
+---
+
+## 📊 Database Schema (PostgreSQL)
+*Designed for high security and performance.*
 
 ```sql
--- Database Schema for Supabase
 CREATE TABLE farm_dashboard_transaction_db (
-    transaction_id UUID PRIMARY KEY DEFAULT gen_random_uuid(), 
+    transaction_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     transaction_date DATE NOT NULL,
-    type_code VARCHAR(10),       --  'INCOME', 'EXPENSE'
-    category_code VARCHAR(10),   --  'FEED', 'EGG', 'TOOLS'
+    type_code VARCHAR(10),       -- 'INCOME' / 'EXPENSE'
+    category_code VARCHAR(10),   -- 'FEED', 'EQUIPMENT', 'EGG'
     amount NUMERIC(15, 2),
     description VARCHAR(100),
     created_at TIMESTAMPTZ DEFAULT NOW(),
-    created_by VARCHAR(30),
-    updated_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_by VARCHAR(30)
+    created_by VARCHAR(30)
 );
-
--- แนะนำ: เปิดใช้งาน RLS เพื่อให้ API ดึงข้อมูลได้
-ALTER TABLE farm_dashboard_transaction_db ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Allow Public Read" ON farm_dashboard_transaction_db FOR SELECT USING (true);
-
