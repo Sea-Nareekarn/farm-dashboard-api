@@ -1,10 +1,10 @@
 # farm-dashboard-api (Backend) 🌾
 
-[![.NET](https://img.shields.io/badge/.NET-9.0-512bd4?logo=dotnet)](https://dotnet.microsoft.com/download)
+[![.NET](https://img.shields.io/badge/.NET-10.0-512bd4?logo=dotnet)](https://dotnet.microsoft.com/download)
 [![Database](https://img.shields.io/badge/Database-Supabase-3ecf8e?logo=supabase)](https://supabase.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-ระบบ API หลังบ้านสำหรับโครงการ **Farm Dashboard** พัฒนาด้วย .NET 9 เพื่อจัดการข้อมูลธุรกรรม (Transactions) ของฟาร์ม เชื่อมต่อกับฐานข้อมูลระบบคลาวด์ Supabase โดยเน้นความปลอดภัยและการจัดการ Configuration ที่เป็นระบบ
+ระบบ API หลังบ้านสำหรับโครงการ **Farm Dashboard** พัฒนาด้วย .NET 10 เพื่อจัดการข้อมูลธุรกรรม (Transactions) ของฟาร์ม เชื่อมต่อกับฐานข้อมูลระบบคลาวด์ Supabase 
 
 ## ✨ Key Features
 - **Transaction Management:** ดึงข้อมูลรายรับ-รายจ่ายของฟาร์ม
@@ -15,9 +15,9 @@
 ---
 
 ## 🛠 Tech Stack & Tools
-- **Framework:** .NET 9.0 (ASP.NET Core Web API)
+- **Framework:** .NET 10.0 (ASP.NET Core Web API)
 - **Database:** Supabase (PostgreSQL)
-- **Documentation:** Swagger UI (Swashbuckle)
+- **Documentation:** Swagger UI 
 - **Environment:** GitHub Codespaces
 
 ---
@@ -25,7 +25,7 @@
 ## 🚀 Getting Started
 
 ### 1. Database Schema (Supabase)
-สร้างตารางในฐานข้อมูลของคุณผ่าน SQL Editor:
+Create SQL Editor:
 
 ```sql
 create table farm_dashboard_transaction_db (
