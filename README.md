@@ -22,8 +22,9 @@ This is a Full-Stack Farm Dashboard application. The project features a robust *
 ### Phase 1: The "First Connection" (Current)
 - [x] **Database:** Initialize Supabase with UUID-based schema.
 - [x] **Backend:** Setup .NET 10 API and Swagger documentation.
-- [ ] **Data Access:** Implement **Dapper** to fetch real data for the first test endpoint.
-- [ ] **End-to-End Test:** Verify connectivity via Postman and Swagger UI.
+- [x] **ORM Integration:** Implement Entity Framework Core with Npgsql.
+- [x] **Data Access:** Successfully fetched real-time data using EF Core.
+- [x] **End-to-End Test:** Verified connectivity via Swagger UI.
 
 ### Phase 2: Cloud & Public Access
 - [ ] **Railway Deployment:** Host the .NET API on Railway for public access.
