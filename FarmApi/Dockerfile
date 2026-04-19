@@ -12,7 +12,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
 COPY --from=build /app .
 
-ENV ASPNETCORE_URLS=http://+:8080
-EXPOSE 8080
+ENV ASPNETCORE_URLS=http://+:5022
+EXPOSE 5022
 
 ENTRYPOINT ["dotnet", "FarmApi.dll"]
