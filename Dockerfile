@@ -6,13 +6,13 @@ RUN dotnet restore "FarmApi/FarmApi.csproj"
 
 COPY . .
 WORKDIR /src/FarmApi
-RUN dotnet publish -c Release -o /app --no-restore
+RUN dotnet publish -c Release -o /app
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
 COPY --from=build /app .
 
-ENV ASPNETCORE_URLS=http://+:5022
-EXPOSE 5022
+ENV ASPNETCORE_URLS=http://+:8080
+EXPOSE 8080
 
 ENTRYPOINT ["dotnet", "FarmApi.dll"]
