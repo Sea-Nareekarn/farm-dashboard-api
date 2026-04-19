@@ -6,7 +6,7 @@ RUN dotnet restore "FarmApi/FarmApi.csproj"
 
 COPY . .
 WORKDIR /src/FarmApi
-RUN dotnet publish -c Release -o /app --no-restore
+RUN dotnet publish -c Release -o /app
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
