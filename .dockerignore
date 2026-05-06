@@ -1,0 +1,11 @@
+bin/
+obj/
+.git
+.gitignore
+.vs
+.vscode
+*.user
+*.swp
+*.swo
+*~
+.DS_Store
