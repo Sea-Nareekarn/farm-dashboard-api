@@ -125,23 +125,22 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// --- Configure Swagger ---
-app.UseSwagger();
-app.UseSwaggerUI(options =>
-{
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-    options.RoutePrefix = string.Empty; // Open Swagger UI at the root URL
-});
-
+// --- Configure Swagger (Development only) ---
 if (app.Environment.IsDevelopment())
 {
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+        options.RoutePrefix = string.Empty; // Open Swagger UI at the root URL
+    });
     app.UseDeveloperExceptionPage();
 }
 
 app.UseRouting(); // เพิ่มการจัดการ Routing ให้ชัดเจน
+app.UseCors("AllowNextJs");
 app.UseAuthentication(); // ตรวจสอบว่าใครเรียกมา
 app.UseAuthorization();  // ตรวจสอบว่าเขามีสิทธิ์ไหม
-app.UseCors("AllowNextJs");
 app.MapControllers();
 
 // Simple health check to verify the server is actually up

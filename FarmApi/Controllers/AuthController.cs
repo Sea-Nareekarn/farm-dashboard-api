@@ -33,7 +33,7 @@ public class AuthController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Login failed for email: {Email}", request.Email);
+            _logger.LogError(ex, "Login failed.");
             return BadRequest(new { message = "Login failed. Please check your credentials." });
         }
     }

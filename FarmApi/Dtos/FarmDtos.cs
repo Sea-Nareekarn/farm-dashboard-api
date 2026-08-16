@@ -19,12 +19,15 @@ public class CreateTransactionRequestDto
     [Required]
     public DateTime TransactionDate { get; set; }
     [Required]
+    [StringLength(10)]
     public string? TypeCode { get; set; }
     [Required]
+    [StringLength(10)]
     public string? CategoryCode { get; set; }
     [Required]
     [Range(0.01, double.MaxValue, ErrorMessage = "Amount must be greater than 0")]
     public decimal Amount { get; set; }
+    [StringLength(100)]
     public string? Description { get; set; }
 }
 
