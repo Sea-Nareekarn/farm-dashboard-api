@@ -1,7 +1,9 @@
 using FarmApi.DTOs;
+using FarmApi.Extensions;
 using FarmApi.Models;
 using FarmApi.Repositories;
 using FarmApi.Exceptions;
+using FarmApi.Utils;
 
 namespace FarmApi.Services;
 
@@ -35,9 +37,9 @@ public class FarmService : IFarmService
                 UniId = t.TransactionId,
                 Date = t.TransactionDate.ToString("yyyy-MM-dd"),
                 TypeCode = t.TypeCode ?? string.Empty,
-                TypeName = getType.FirstOrDefault(c => c.Code == t.TypeCode)?.NameLoc ?? string.Empty,
+                TypeName = getType.GetNameLoc(t.TypeCode),
                 CategoryCode = t.CategoryCode ?? string.Empty,
-                CategoryName = getCategory.FirstOrDefault(c => c.Code == t.CategoryCode)?.NameLoc ?? string.Empty,
+                CategoryName = getCategory.GetNameLoc(t.CategoryCode),
                 Amount = t.Amount,
              }).ToList();
 
@@ -47,8 +49,8 @@ public class FarmService : IFarmService
             response.TotalIncome = transactions.Where(t => t.TypeCode == "IN").Sum(t => t.Amount);
             response.TotalExpense = transactions.Where(t => t.TypeCode == "OUT").Sum(t => t.Amount);
 
-            response.PercentageIncome = totalSum > 0 ? Math.Round(response.TotalIncome / totalSum * 100, 2) : 0;
-            response.PercentageExpense = totalSum > 0 ? Math.Round(response.TotalExpense / totalSum * 100, 2) : 0;
+            response.PercentageIncome = CalculationUtils.PercentageOf(response.TotalIncome, totalSum);
+            response.PercentageExpense = CalculationUtils.PercentageOf(response.TotalExpense, totalSum);
 
             response.NetProfit = response.TotalIncome - response.TotalExpense;
             response.ActiveNetFlag = response.NetProfit >= 0 ? "Y" : "N";
@@ -58,8 +60,8 @@ public class FarmService : IFarmService
                 .Select(g => new BreakdownListOverviewDto
                 {
                     CategoryCode = g.Key,
-                    CategoryName = getCategory.FirstOrDefault(c => c.Code == g.Key)?.NameLoc ?? string.Empty,
-                    Percentage = totalSum > 0 ? Math.Round(g.Sum(t => t.Amount) / totalSum * 100, 2) : 0
+                    CategoryName = getCategory.GetNameLoc(g.Key),
+                    Percentage = CalculationUtils.PercentageOf(g.Sum(t => t.Amount), totalSum)
                 }).ToList();
 
             return response;
